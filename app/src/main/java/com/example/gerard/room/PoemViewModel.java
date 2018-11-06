@@ -17,9 +17,11 @@ public class PoemViewModel extends AndroidViewModel {
 
     LiveData<List<Poem>> getAllPoems() { return mRepository.getAllPoems(); }
 
+    LiveData<List<Poem>> getAllPoemsOrderedBy(String order) { return mRepository.getAllPoemsOrderedBy(order); }
+
     LiveData<Poem> getPoem(int id){ return mRepository.getPoem(id); }
 
-    public void insert(Poem poem) { mRepository.insert(poem); }
+    public void insertPoem(Poem poem) { mRepository.insert(poem); }
 
     public void setRating(Poem poem) { mRepository.setRating(poem); }
 }

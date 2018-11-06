@@ -12,4 +12,5 @@ public class Poem {
     public String title;
     public String content;
     public float rating;
+    public String date;
 }

@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {Poem.class}, version = 1)
+@Database(entities = {Poem.class}, version = 2)
 public abstract class PoemRoomDatabase extends RoomDatabase {
 
     public abstract PoemDAO poemDAO();
@@ -18,6 +18,7 @@ public abstract class PoemRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             PoemRoomDatabase.class, "poem_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

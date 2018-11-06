@@ -8,17 +8,35 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 @Dao
-public interface PoemDAO {
+public abstract class PoemDAO {
 
     @Insert
-    void insert(Poem poem);
+    abstract void insert(Poem poem);
 
     @Query("SELECT * FROM poem")
-    LiveData<List<Poem>> getAllPoems();
+    abstract LiveData<List<Poem>> getAllPoems();
+
+    @Query("SELECT * FROM poem ORDER BY date DESC")
+    abstract LiveData<List<Poem>> getAllPoemsOrderedByDate();
+
+    @Query("SELECT * FROM poem ORDER BY title")
+    abstract LiveData<List<Poem>> getAllPoemsOrderedByTitle();
+
+    @Query("SELECT * FROM poem ORDER BY rating DESC")
+    abstract LiveData<List<Poem>> getAllPoemsOrderedByRating();
+
+    LiveData<List<Poem>> getAllPoemsOrderedBy(String order){
+        if(order.equals("date")){
+            return getAllPoemsOrderedByDate();
+        }else if(order.equals("rating")){
+            return getAllPoemsOrderedByRating();
+        }
+        return getAllPoemsOrderedByTitle();
+    }
 
     @Query("SELECT * FROM poem WHERE id = :id")
-    LiveData<Poem> getPoem(int id);
+    abstract LiveData<Poem> getPoem(int id);
 
     @Query("UPDATE poem SET rating=:rating WHERE id=:id")
-    void setRating(int id, float rating);
+    abstract void setRating(int id, float rating);
 }

@@ -18,6 +18,10 @@ public class PoemRepository {
         return mPoemDao.getAllPoems();
     }
 
+    LiveData<List<Poem>> getAllPoemsOrderedBy(String order) {
+        return mPoemDao.getAllPoemsOrderedBy(order);
+    }
+
     LiveData<Poem> getPoem(int id){ return mPoemDao.getPoem(id); }
 
     public void insert(Poem poem) {
